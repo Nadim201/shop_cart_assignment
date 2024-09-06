@@ -18,11 +18,13 @@ class _CartPageState extends State<CartPage> {
   }
 
   void itemDecrement(int index) {
-    setState(() {
-      if (cartItem[index]['quantity'] > 0) {
-        cartItem[index]['quantity']--;
-      }
-    });
+    setState(
+      () {
+        if (cartItem[index]['quantity'] > 0) {
+          cartItem[index]['quantity']--;
+        }
+      },
+    );
   }
 
   @override
@@ -37,35 +39,39 @@ class _CartPageState extends State<CartPage> {
       body: Column(
         children: [
           SizedBox(height: defaultPadding),
-          Expanded(
-            child: ListView.builder(
-              itemCount: cartItem.length,
-              itemBuilder: (context, index) {
-                var item = cartItem[index];
-                return CardDesign(
-                  productName: item['title'],
-                  color: item['color'],
-                  size: item['size'],
-                  quantity: item['quantity'],
-                  price: item['price'],
-                  image: item['image'],
-                  increment: () => itemIncrement(index),
-                  decrement: () => itemDecrement(index),
-                );
-              },
-            ),
-          ),
+          buildListView(),
           buildTotalItem(context)
         ],
       ),
     );
   }
 
-  Padding buildTotalItem(BuildContext context) {
-    double totalAmount=0;
-   for(var item in cartItem){
-     totalAmount += item['quantity']* item['price'];
-   }
+  Widget buildListView() {
+    return Expanded(
+      child: ListView.builder(
+        itemCount: cartItem.length,
+        itemBuilder: (context, index) {
+          var item = cartItem[index];
+          return CardDesign(
+            productName: item['title'],
+            color: item['color'],
+            size: item['size'],
+            quantity: item['quantity'],
+            price: item['price'],
+            image: item['image'],
+            increment: () => itemIncrement(index),
+            decrement: () => itemDecrement(index),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget buildTotalItem(BuildContext context) {
+    double totalAmount = 0;
+    for (var item in cartItem) {
+      totalAmount += item['quantity'] * item['price'];
+    }
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 30),
       child: Column(
