@@ -25,60 +25,40 @@ class CardDesign extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Card(
-    color: Colors.white,
-    margin: EdgeInsets.symmetric(horizontal: defaultPadding, vertical: 5),
-    elevation: 1,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(10),
-    ),
-    child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: defaultPadding, vertical: 5),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          buildImageSection(),
-          const SizedBox(width: 16),
-          buildProductDetails(),
-          buildTotalPrice(context), // Pass context here
-        ],
-      ),
-    ),
-  );
+        color: Colors.white,
+        margin: EdgeInsets.symmetric(horizontal: defaultPadding, vertical: 10),
+        elevation: 1,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Padding(
+          padding:
+              EdgeInsets.symmetric(horizontal: defaultPadding, vertical: 7),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              buildImageSection(),
+              const SizedBox(width: 16),
+              buildProductDetails(),
+              buildTotalPrice(context), // Pass context here
+            ],
+          ),
+        ),
+      );
 
-  Widget buildTotalPrice(BuildContext context) { // Accept context here
+  Widget buildTotalPrice(BuildContext context) {
+    // Accept context here
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
         IconButton(
           icon: const Icon(Icons.more_vert),
-          onPressed: () {
-            showDialog(
-              context: context, // Use context here
-              builder: (context) => AlertDialog(
-                title: const Text('Options'),
-                content: const Text('Choose an action'),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Remove Item'),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Save for Later'),
-                  ),
-                ],
-              ),
-            );
-          },
+          onPressed: () {},
         ),
         const SizedBox(height: 16),
         Text(
-          '\$${(price * quantity).toStringAsFixed(2)}',
+          '\$${quantity * price}',
           style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.bold,
@@ -186,8 +166,8 @@ class CardDesign extends StatelessWidget {
 
   Widget buildImageSection() {
     return Container(
-      height: 80,
-      width: 80,
+      height: 85,
+      width: 85,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         image: DecorationImage(

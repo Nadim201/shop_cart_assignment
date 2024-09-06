@@ -11,6 +11,20 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  void itemIncrement(int index) {
+    setState(() {
+      cartItem[index]['quantity']++;
+    });
+  }
+
+  void itemDecrement(int index) {
+    setState(() {
+      if (cartItem[index]['quantity'] > 0) {
+        cartItem[index]['quantity']--;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,6 +36,7 @@ class _CartPageState extends State<CartPage> {
       ),
       body: Column(
         children: [
+          SizedBox(height: defaultPadding),
           Expanded(
             child: ListView.builder(
               itemCount: cartItem.length,
@@ -32,7 +47,6 @@ class _CartPageState extends State<CartPage> {
                   color: item['color'],
                   size: item['size'],
                   quantity: item['quantity'],
-                  // Convert to String for display
                   price: item['price'],
                   image: item['image'],
                   increment: () => itemIncrement(index),
@@ -47,30 +61,13 @@ class _CartPageState extends State<CartPage> {
     );
   }
 
-  // Increment item quantity
-  void itemIncrement(int index) {
-    setState(() {
-      cartItem[index]['quantity']++;
-    });
-  }
-
-  // Decrement item quantity
-  void itemDecrement(int index) {
-    setState(() {
-      if (cartItem[index]['quantity'] > 0) {
-        cartItem[index]['quantity']--;
-      }
-    });
-  }
-
   Padding buildTotalItem(BuildContext context) {
-    double totalAmount = 0;
-    for (var item in cartItem) {
-      totalAmount += item['quantity'] * item['price'];
-    }
-
+    double totalAmount=0;
+   for(var item in cartItem){
+     totalAmount += item['quantity']* item['price'];
+   }
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 30),
       child: Column(
         children: [
           Row(
@@ -79,7 +76,8 @@ class _CartPageState extends State<CartPage> {
               Text('Total Amount:',
                   style: TextStyle(fontSize: 14, color: secondTextColor)),
               Text('\$${totalAmount.toStringAsFixed(2)}',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                  style: const TextStyle(
+                      fontSize: 14, fontWeight: FontWeight.bold)),
             ],
           ),
           const SizedBox(height: 16),
