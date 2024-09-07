@@ -47,7 +47,6 @@ class CardDesign extends StatelessWidget {
       );
 
   Widget buildTotalPrice(BuildContext context) {
-    // Accept context here
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.end,
