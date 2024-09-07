@@ -18,7 +18,7 @@ class CardDesign extends StatelessWidget {
   final String color;
   final String size;
   final int quantity;
-  final double price;
+  final int price;
   final String image;
   final VoidCallback increment;
   final VoidCallback decrement;
@@ -58,7 +58,7 @@ class CardDesign extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         Text(
-          '\$${quantity * price}',
+          '\$${price.toString()}',
           style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.bold,
