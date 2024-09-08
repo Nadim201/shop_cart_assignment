@@ -57,7 +57,7 @@ class CardDesign extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         Text(
-          '\$${price.toString()}',
+          '\$${quantity*price}',
           style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.bold,
